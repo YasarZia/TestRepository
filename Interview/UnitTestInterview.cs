@@ -45,7 +45,20 @@ namespace Interview
 
             var result = repository.All();
             Assert.IsTrue(((IEnumerable<Storeable>)result).Contains(newitem));
+        }
 
+        [TestMethod]
+        public void Test_Delete()
+        {
+            repository = new InMemoryRepository<Storeable>();
+            var newitem = new Storeable { Id = 1, Name = "New Item" };
+
+            repository.Save(newitem);
+
+            repository.Delete(1);
+
+            var result = repository.All();
+            Assert.IsFalse(((IEnumerable<Storeable>)result).Contains(newitem));
         }
     }
 }
