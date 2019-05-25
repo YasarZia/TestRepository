@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interview
 {
@@ -27,23 +24,13 @@ namespace Interview
 
         public T FindById(IComparable id)
         {
-            T result = default(T);
-
-            IStoreable storeable = new Storeable() { Id = id, Name = "" };
-
-            foreach(var s in inMemoryList)
-            {
-                if(s.Id.ToString() == storeable.Id.ToString())
-                {
-                    result = s;
-                }
-            }
-
-            return result;
+            return inMemoryList.Find(Match(id));
         }
 
         public void Save(T item)
         {
+            Delete(item.Id);
+
             inMemoryList.Add(item);
         }
 
