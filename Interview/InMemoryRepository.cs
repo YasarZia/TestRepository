@@ -27,12 +27,24 @@ namespace Interview
 
         public T FindById(IComparable id)
         {
-            throw new NotImplementedException();
+            T result = default(T);
+
+            IStoreable storeable = new Storeable() { Id = id, Name = "" };
+
+            foreach(var s in inMemoryList)
+            {
+                if(s.Id.ToString() == storeable.Id.ToString())
+                {
+                    result = s;
+                }
+            }
+
+            return result;
         }
 
         public void Save(T item)
         {
-            throw new NotImplementedException();
+            inMemoryList.Add(item);
         }
     }
 }
