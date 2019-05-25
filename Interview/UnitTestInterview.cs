@@ -17,5 +17,21 @@ namespace Interview
 
             Assert.IsInstanceOfType(result, typeof(IEnumerable<Storeable>));
         }
+
+        [TestMethod]
+        public void Test_Find()
+        {
+            repository = new InMemoryRepository<Storeable>();
+            var firstItem = new Storeable { Id = 1, Name = "First Item" };
+            var secondItem = new Storeable { Id = 2, Name = "Second Item" };
+            var thirdItem = new Storeable { Id = 3, Name = "Third Item" };
+
+            repository.Save(firstItem);
+            repository.Save(secondItem);
+            repository.Save(thirdItem);
+
+            var result = repository.FindById(2);
+            Assert.AreEqual(secondItem, result);
+        }
     }
 }
