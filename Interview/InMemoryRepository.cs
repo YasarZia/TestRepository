@@ -22,7 +22,7 @@ namespace Interview
 
         public void Delete(IComparable id)
         {
-            throw new NotImplementedException();
+            inMemoryList.RemoveAll(Match(id));
         }
 
         public T FindById(IComparable id)
@@ -45,6 +45,11 @@ namespace Interview
         public void Save(T item)
         {
             inMemoryList.Add(item);
+        }
+
+        private Predicate<T> Match(IComparable id)
+        {
+            return i => i.Id.Equals(id);
         }
     }
 }
