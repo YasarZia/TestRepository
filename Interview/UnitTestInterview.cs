@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Interview
@@ -32,6 +33,19 @@ namespace Interview
 
             var result = repository.FindById(2);
             Assert.AreEqual(secondItem, result);
+        }
+
+        [TestMethod]
+        public void Test_Save()
+        {
+            repository = new InMemoryRepository<Storeable>();
+            var newitem = new Storeable { Id = 1, Name = "New Item" };
+
+            repository.Save(newitem);
+
+            var result = repository.All();
+            Assert.IsTrue(((IEnumerable<Storeable>)result).Contains(newitem));
+
         }
     }
 }
